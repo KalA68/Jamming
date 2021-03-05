@@ -1,8 +1,8 @@
 //const { default: SearchResults } = require("../Components/SearchResults/SearchResults");
 
 const clientId = "79d1e67cb2cf473e9ef21eb3dc36a2b2";
-//const redirectUri = "http://localhost:3000/";
-const redirectUri = "https://MUSIC_JAM.surge.sh";
+const redirectUri = "http://localhost:3000/";
+//const redirectUri = "https://MUSIC_JAM.surge.sh";
 
 let accessToken;
 const Spotify = {
@@ -84,4 +84,4 @@ const Spotify = {
     }
 };
 
-module.exports = Spotify;
+export default Spotify;
