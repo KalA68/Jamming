@@ -1,7 +1,7 @@
 //const { default: SearchResults } = require("../Components/SearchResults/SearchResults");
 
 const clientId = "79d1e67cb2cf473e9ef21eb3dc36a2b2";
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "http://localhost:3000";
 //const redirectUri = "https://MUSIC_JAM.surge.sh";
 
 let accessToken;
@@ -42,7 +42,7 @@ const Spotify = {
                         if(!jsonResponse.tracks) {
                             return [];
                         }
-                        return jsonResponse.tracks.item.map(track => ({
+                        return jsonResponse.tracks.items.map(track => ({
                                                 id: track.id, 
                                                 name: track.name, 
                                                 artist:track.artists[0].name, 
@@ -62,14 +62,15 @@ const Spotify = {
         let userId;
 
         return fetch("https://api.spotify.com/v1/me", {headers: headers}
-                    ).then(response => response.json()
+                    ).then(response => {
+                        return response.json()}
                     ).then(jsonResponse => {
                         userId = jsonResponse.id;
                         return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
                             headers: headers,
                             method: 'POST', 
                             body: JSON.stringify({name: name})
-                        }).then (response => response.json()
+                        }).then (response => {return response.json()}
                         ).then(jsonResponse => {
                             const playlistId = jsonResponse.id;
                             return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
