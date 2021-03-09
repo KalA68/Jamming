@@ -56,17 +56,17 @@ class App extends React.Component {
     }
   
 
-    newFunc() {
+    newFunc(searchResults) {
         const knownIds = this.state.playlistTracks.map(track => track.id);
-        const filteredArray = this.state.searchResults.filter((track) => !knownIds.includes(track.id))
+        const filteredArray = searchResults.filter((track) => !knownIds.includes(track.id))
           return filteredArray;
             }
 
     search(term) {
-      Spotify.search(term).then(this.newFunc()).then(filteredArray => {
-        this.setState({searchResults: filteredArray});
-      })
-    }
+      Spotify.search(term).then(searchResults => {
+        this.setState({searchResults: this.newFunc(searchResults)})
+    })
+  }
 
     render() {
       return (
